@@ -1,3 +1,5 @@
+const request = require('request-promise');
+
 class Translator {
 
     constructor(sourceLang, exportsLang) {
@@ -6,17 +8,16 @@ class Translator {
     }
 
     async translateJson(json) {
-            try {
-                let result = {};
-                this.exportsLang.forEach(async (lang) => {
-                    result[lang] = {};
-                    result[lang] = await this.iterateJson(json, result[lang], lang);
-                });
-                return result;
+        try {
+            let result = {};
+            for (let lang of this.exportsLang) {
+                result[lang] = {};
+                await this.iterateJson(json, result[lang], lang);
             }
-            catch(e) {
-                throw e;
-            }
+            return result;
+        } catch (e) {
+            throw e;
+        }
     }
 
     async iterateJson(json, result, lang) {
@@ -24,10 +25,9 @@ class Translator {
             if (json.hasOwnProperty(key)) {
                 if (typeof json[key] === typeof {}) {
                     result[key] = {};
-                    return await this.iterateJson(json[key], result[key]);
+                    await this.iterateJson(json[key], result[key], lang);
                 } else {
-                        result[key] = await this.translateText(json[key], lang);
-                        return result;
+                    result[key] = await this.translateText(json[key], lang);
                 }
             } else {
                 throw "Error in JSON format";
@@ -37,7 +37,26 @@ class Translator {
     }
 
     async translateText(text, lang) {
-        return text;
+        const options = {
+            uri: 'https://translation.googleapis.com/language/translate/v2',
+            method: 'GET',
+            qs: {
+                'source': this.sourceLang,
+                'target': lang,
+                'q': text,
+                'key': 'AIzaSyC8hvcPfF8iMfhrpc-WennzssrvHHjSkIk'
+            },
+            json: true
+        };
+        try {
+            const response = await request.post(options);
+            if (response) {
+                return response.data.translations[0].translatedText;
+            }
+        }
+        catch(e) {
+            throw e;
+        }
     }
 }
 

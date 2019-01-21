@@ -3,7 +3,36 @@ const router = express.Router();
 const Translator = require('../utils/translator.js');
 const http = require('http');
 
-/* POST Translate in put JSON file to multiple languages */
+/**
+ * @api {post} /api/translate Translate your JSON to any language
+ * @apiName Translate
+ * @apiGroup Translate
+ * @apiParam {Object} json Contains the JSON you want to translate
+ * @apiParam {string} sourceLang The source language you are using
+ * @apiParam {string[]} exportLangs An array containing each language you want to translate to as a string (i.e "en" for english)
+ * @apiParamExample {json} Request-Example:
+ *      {
+ *          "json": {
+ *              "test": "Ce texte était en français"
+ *          },
+ *          "sourceLang": "fr",
+ *          "exportLangs": [
+ *              "en",
+ *              "es"
+ *          ]
+ *      }
+ * @apiSuccessExample {json} Success-Response:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "en": {
+ *              "test": "This text was in French"
+ *          },
+ *          "es": {
+ *              "test": "Este texto estaba en francés"
+ *          }
+ *      }
+ * @author Antoine Laborderie
+ */
 router.post('/', async function (req, res, next) {
     try {
         const json = req.body.json;

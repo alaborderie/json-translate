@@ -2,9 +2,10 @@ const request = require('request-promise');
 
 class Translator {
 
-    constructor(sourceLang, exportsLang) {
+    constructor(sourceLang, exportsLang, apiKey) {
         this.sourceLang = sourceLang;
         this.exportsLang = exportsLang;
+        this.apiKey = apiKey;
     }
 
     async translateJson(json) {
@@ -44,7 +45,7 @@ class Translator {
                 'source': this.sourceLang,
                 'target': lang,
                 'q': text,
-                'key': 'AIzaSyC8hvcPfF8iMfhrpc-WennzssrvHHjSkIk'
+                'key': this.apiKey
             },
             json: true
         };

@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    div.container.text-center
+        h1 Welcome to translate-json.com !
+
+    div.container.mt-5.text-center
+        a(href='/translate')
+            button.btn.btn-secondary Start now!
+
+    div.container.mt-3.text-center
+        p To use the REST api, click below
+        a(href='/docs')
+            button.btn.btn-secondary API Docs

@@ -1,14 +1,16 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(async, src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
-    script.
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-3947519247613386",
-            enable_page_level_ads: true
-        });
+    head
+        title Translate JSON
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        script(src='javascripts/jquery.js')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(async, src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+        script.
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: 'ca-pub-3947519247613386',
+                enable_page_level_ads: true
+            });
 
-  body
-    block content
+    body
+        block content

@@ -18,7 +18,7 @@ const translateJson = () => {
         })
     };
 
-    fetch('http://localhost:3000/translate/api/v1', options)
+    fetch('https://translate-json.com/translate/api/v1', options)
         .then(async (response) => {
             if (response.status === 200) {
                 const jsonFiles = [];

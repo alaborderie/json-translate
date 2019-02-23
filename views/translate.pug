@@ -2,45 +2,45 @@ extends layout
 
 block content
     header.masthead
-        script(type='text/javascript' src='/js/translateJson.js')
-        h1.mt-5.text-center Translate your JSON
-        form.container.mt-5(action='javascript:void(0)' onsubmit='translateJson()')
-            p Enter your JSON here:
-                textarea.form-control(
-                rows=15
-                id='json'
-                name='json'
-                placeholder='{"someKey": "And a value to be translated!"}'
-                )
-            p Pick the source language:
-            div.row
-                each lang in languages
-                    div.form-check.form-check-inline.col-1
-                        input.form-check-input(
-                        type='radio'
-                        id=lang + 'radio'
-                        value=lang
+        div.container.h-100
+            h1.text-center.text-white.text-uppercase.font-weight-bold Translate your JSON
+            hr.divider.my-4
+            form.container.mt-5(action='javascript:void(0)' onsubmit='translateJson()')
+                div.form-group
+                    h2.text-white Enter your JSON here:
+                    textarea.form-control(
+                    rows=5
+                    id='json'
+                    name='json'
+                    placeholder='{"someKey": "And a value to be translated!"}'
+                    )
+                div.form-group
+                    h2.text-white Pick the source language:
+                    select.form-control(
+                        id='sourceLang'
                         name='sourceLang'
                         )
-                        label.form-check-label(for=lang + 'radio') #{lang}
-            p.mt-3 Check target languages:
-            div.row
-                each lang in languages
-                    div.form-check.form-check-inline.col-1
-                        input.form-check-input(
-                        type='checkbox'
-                        value=lang
-                        name='exportLangs'
-                        id=lang + 'checkbox'
-                        )
-                        label.form-check-label(for=lang + 'checkbox') #{lang}
-            p.mt-3 Enter your Google Translate API Key:
-                input.form-control(
-                type='text'
-                id='apiKey'
-                name='apiKey'
-                )
-            div.text-center.mt-4
-                button.btn.btn-secondary(
-                type='submit'
-                ) Download files
+                        each lang in languages
+                            option(value=lang) #{lang.toUpperCase()}
+                div.form-group
+                    h2.text-white.mt-3 Check target languages:
+                    select.form-control(
+                    name='exportLangs'
+                    id='exportLangs'
+                    multiple
+                    )
+                        each lang in languages
+                            option(value=lang) #{lang.toUpperCase()}
+                div.form-group
+                    h2.text-white.mt-3 Enter your Google Translate API Key:
+                    input.form-control(
+                    type='text'
+                    id='apiKey'
+                    name='apiKey'
+                    )
+                div.text-center.mt-4
+                    button.btn.btn-primary.btn-xl(
+                    type='submit'
+                    ) Download files
+
+    script(type='text/javascript' src='/js/translateJson.js')

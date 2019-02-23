@@ -1,9 +1,40 @@
+- var navItems = [{ name: 'About', id: '/#about'}, { name: 'Start now', id:'/translate'}, { name: 'API Docs', id:'/docs'}, { name: 'Contact', id:'/#contact'}]
 doctype html
 html
     head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        meta(name='description', content='Google Translate your JSON Files API')
+        meta(name='author', content='Antoine Laborderie')
+
         title Translate JSON
-        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-        script(src='javascripts/jquery.js')
-        link(rel='stylesheet', href='/stylesheets/style.css')
-    body
+
+        link(rel='stylesheet', type='text/css', href='/vendor/fontawesome-free/css/all.min.css')
+        link(href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700', rel='stylesheet')
+        link(href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic', rel='stylesheet', type='text/css')
+        link(href='/vendor/magnific-popup/magnific-popup.css', rel='stylesheet')
+        link(href='/css/creative.min.css', rel='stylesheet')
+
+    body#page-top
+        nav.navbar.navbar-expand-lg.navbar-light.fixed-top.py-3#mainNav
+            div.container
+                a.navbar-brand.js-scroll-trigger(href='/#page-top') Translate JSON
+                button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false' aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                div.collapse-navbar-collapse#navbarResponsive
+                    ul.navbar-nav.ml-auto.my-2.my-lg-0
+                        each navItem in navItems
+                            li.nav-item
+                                a.nav-link.js-scroll-trigger(href=navItem.id) #{navItem.name}
+
         block content
+
+        footer.bg-light.py-5
+            div.container
+                div.small.text-center.text-muted Copyright &copy; 2019 - Antoine Laborderie
+
+        script(src='/vendor/jquery/jquery.min.js')
+        script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
+        script(src='/vendor/jquery-easing/jquery.easing.min.js')
+        script(src='/vendor/magnific-popup/jquery.magnific-popup.min.js')
+        script(src='/js/creative.min.js')

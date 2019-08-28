@@ -1,0 +1,61 @@
+const Translator = require("../utils/translator");
+const fs = require("fs");
+const args = process.argv.slice(2);
+
+if (args.length === 0) {
+  printHelp();
+  process.exit(1);
+}
+
+if (args[0] === "-h" || args[0] === "--help") {
+  printHelp();
+  process.exit(0);
+}
+if (args.length < 3) {
+  console.log("Not enough arguments given to command.");
+  printHelp();
+}
+
+try {
+  const json = fs.readFileSync(args[0]);
+  const sourceLang = args[1];
+  const exportLangs = args.slice(2);
+  const apiKey = process.env.TRANSLATE_API_KEY;
+
+  let translator = new Translator(sourceLang, exportLangs, apiKey);
+  translator
+    .translateJson(json)
+    .then(result => {
+      console.log(result);
+      process.exit(0);
+    })
+    .catch(e => {
+      printError(e);
+      process.exit(1);
+    });
+} catch (e) {
+  printError(e);
+  process.exit(1);
+}
+
+function printHelp() {
+  console.log(`Welcome to the JSON Translate CLI!
+  To use it, please follow this syntax :
+
+  translate {filePath} {sourceLangCode} [...targetLangCodes]
+
+      -h, --help            Show this help
+
+  You must at least provide one targetLangCode
+  Codes can be FR, EN, IT, and so on...
+
+  You must declare a TRANSLATE_API_KEY system variable.
+  `);
+}
+
+function printError(error) {
+  console.log(`There was an error during command execution.
+  Please make sure you provided correct arguments.
+  Error : ${error}
+  `);
+}

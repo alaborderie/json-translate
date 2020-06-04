@@ -19,16 +19,7 @@ app.set('port', port);
 /**
  * Create HTTPS server.
  */
-let server;
-if (process.env.NODE_ENV === 'prod') {
-    const credentials = {
-        key: fs.readFileSync('/etc/letsencrypt/live/translate-json.com/privkey.pem', 'utf8'),
-        cert: fs.readFileSync('/etc/letsencrypt/live/translate-json.com/fullchain.pem', 'utf8')
-    };
-    server = https.createServer(credentials, app);
-} else {
-    server = https.createServer(app);
-}
+let server = https.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.

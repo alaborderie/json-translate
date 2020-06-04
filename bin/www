@@ -6,7 +6,7 @@
 
 const app = require('../app');
 const debug = require('debug')('json-translate:server');
-const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 /**
@@ -17,9 +17,9 @@ const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTPS server.
+ * Create HTTP server.
  */
-let server = https.createServer(app);
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.

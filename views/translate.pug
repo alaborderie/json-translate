@@ -32,7 +32,8 @@ block content
                         each lang in languages
                             option(value=lang) #{lang.toUpperCase()}
                 div.form-group
-                    h2.text-white.mt-3 Enter your Google Translate API Key:
+                    h2.text-white.mt-3 Enter your 
+                        a.text-white(href='https://cloud.google.com/translate/docs/basic/setup-basic?hl=fr') Google Translate API Key:
                     input.form-control(
                     type='text'
                     id='apiKey'

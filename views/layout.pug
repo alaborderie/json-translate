@@ -41,3 +41,10 @@ html
         script(src='/vendor/jquery-easing/jquery.easing.min.js')
         script(src='/vendor/magnific-popup/jquery.magnific-popup.min.js')
         script(src='/js/creative.min.js')
+        script(async='async' src='https://www.googletagmanager.com/gtag/js?id=UA-168946242-1')
+        script.
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-168946242-1');

@@ -48,6 +48,6 @@ app.use((err, req, res, next) => {
 });
 
 // HTTP Traffic
-app.listen(process.env.PORT || 8080, function () {});
+// app.listen(process.env.PORT || 8080, function () {});
 
 module.exports = app;
